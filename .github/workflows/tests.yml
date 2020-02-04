@@ -53,6 +53,7 @@ jobs:
 
     - name: Install bundle
       run:
+        set -eux
         gem install bundler
         bundle install --jobs 4 --retry 3
 
