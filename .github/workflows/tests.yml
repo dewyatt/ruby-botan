@@ -51,12 +51,6 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
 
-    - name: Install bundle
-      run:
-        set -eux
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-
     - name: Workaround macOS SIP
       if: matrix.os == 'macos-latest'
       run: |
@@ -64,6 +58,8 @@ jobs:
 
     - name: Run tests
       run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
         export LD_LIBRARY_PATH="$BOTAN_INSTALL/lib"
         bundle exec rake
 
